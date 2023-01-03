@@ -70,6 +70,9 @@ const useCounterStore = defineStore("counter", {
         }
       }
     },
+    addList(list) {
+      this.userData.userLists.push(list);
+    }
   },
 });
 
