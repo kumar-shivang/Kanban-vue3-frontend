@@ -1,0 +1,36 @@
+.
+├── file_structure.txt
+├── index.html
+├── package.json
+├── package-lock.json
+├── public
+│   └── favicon.ico
+├── README.md
+├── src
+│   ├── App.vue
+│   ├── assets
+│   │   ├── base.css
+│   │   ├── logo.svg
+│   │   └── main.css
+│   ├── components
+│   │   ├── cardCreationFrom.vue
+│   │   ├── CardEditForm.vue
+│   │   ├── Card.vue
+│   │   ├── ListSummary.vue
+│   │   ├── List.vue
+│   │   └── navbar.vue
+│   ├── main.js
+│   ├── router
+│   │   └── index.js
+│   ├── scss
+│   │   └── styles.scss
+│   ├── stores
+│   │   └── counter.js
+│   └── views
+│       ├── HomeView.vue
+│       ├── LoginView.vue
+│       ├── RegisterView.vue
+│       └── SummaryView.vue
+└── vite.config.js
+
+9 directories, 25 files
