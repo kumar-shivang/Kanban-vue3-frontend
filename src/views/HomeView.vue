@@ -1,17 +1,18 @@
 <template>
+  <div class="text-danger" v-if="errorMsg">
+    Something went wrong, please login again.
+  </div>
   <List
     v-for="list in store.userData.userLists"
     :key="list.listID"
     :list_name="list.title"
     :listID="list.listID"
   >
-    <Card
-      v-for="card in list.cards"
-      :key="card.cardID"
-      :cardTitle="card.cardName"
-      :cardText="card.content"
-    ></Card>
+    <Card v-for="card in list.cards" :key="card.cardID" :card="card"></Card>
   </List>
+  <h3 v-if="!store.userLists.length">
+    Try adding some lists and cards to your board.
+  </h3>
 </template>
 
 <script>
@@ -27,6 +28,7 @@ export default {
   data() {
     return {
       create_list: this.store.add_list,
+      errorMsg: "",
     };
   },
   name: "HomeView",
@@ -41,23 +43,7 @@ export default {
     }
   },
   mounted() {
-    async function getUser() {
-      const response = await fetch("http://localhost:5000/user", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + document.cookie.split("=")[1],
-        },
-      });
-      if (response.ok) {
-        return await response.json();
-      } else {
-        console.log(response);
-      }
-    }
-    getUser().then((data) => {
-      this.store.setUser(data.user);
-    });
+    this.store.getUser();
   },
 };
 </script>

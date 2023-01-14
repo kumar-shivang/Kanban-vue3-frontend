@@ -1,32 +1,36 @@
 <template>
-  <form @submit="fetchToken">
-    <div class="form-group, mb-4">
-      <input
-        type="text"
-        name="username"
-        placeholder="Username"
-        class="form-control"
-        v-model="username"
-      />
+  <form @submit="fetchToken" class="form-control">
+    <h2 class="mb-4">Login</h2>
+    <label for="floatingInput" class="mb-1">Email address</label>
+    <input
+      type="text"
+      name="username"
+      placeholder="Username"
+      class="form-control mb-3"
+      v-model="username"
+      id="floatingInput"
+    />
+    <label for="floatingPassword" class="mb-1">Password</label>
+    <input
+      type="password"
+      name="password"
+      placeholder="password"
+      class="form-control mb-3"
+      v-model="password"
+      id="floatingPassword"
+    />
+    <div class="text-danger mb-4" v-if="errorMsg">
+      {{ errorMsg }}
     </div>
-    <div class="form-group, mb-4">
-      <input
-        type="password"
-        name="password"
-        placeholder="password"
-        class="form-control"
-        v-model="password"
-      />
-    </div>
-    <div class="d-grid gap-2 col-2 mx-auto">
-      <button class="btn btn-primary" type="submit">Login</button>
-    </div>
+    <button class="btn btn-primary btn-outline-light m-2" type="submit">Login</button>
+    <button class="btn btn-light btn-outline-primary m-2" @click="$router.push('register')">
+      Register
+    </button>
   </form>
 </template>
 
 <script>
 import useStore from "../stores/counter.js";
-// import $router from "../router/index.js";
 export default {
   setup() {
     const store = useStore();
@@ -40,6 +44,7 @@ export default {
       username: "",
       password: "",
       isLoggedIn: this.store.isLoggedIn,
+      errorMsg: "",
     };
   },
   methods: {
@@ -55,16 +60,17 @@ export default {
           password: this.password,
         }),
       });
-      console.log(response);
       if (response.ok) {
-        const data = await response.json();
-        console.log(data);
-        this.store.setToken(data.access_token);
-        document.cookie = "access_token=" + data.access_token;
-        console.log(data.access_token);
-        this.$router.push("/");
+        if (response.status === 200) {
+          const data = await response.json();
+          this.store.setToken(data.access_token);
+          document.cookie = "access_token=" + data.access_token;
+          this.$router.push("/");
+        }
       } else {
-        console.log(response);
+        const data = await response.json();
+        this.errorMsg = data.error;
+        console.log(this.errorMsg);
       }
     },
   },
@@ -75,9 +81,9 @@ export default {
 form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding: 3rem;
-  width: 100%;
+  width: 50%;
+  margin: auto;
+  height: 50%;
 }
 </style>

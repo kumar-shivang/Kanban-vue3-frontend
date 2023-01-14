@@ -2,14 +2,13 @@
   <header>
     <navbar></navbar>
   </header>
-  <main class="d-flex flex-row justify-content-between flex-wrap">
+  <main class="d-flex flex-row justify-content-start flex-wrap">
     <RouterView></RouterView>
   </main>
   <footer></footer>
 </template>
 
 <script>
-import useStore from "./stores/counter.js";
 import navbar from "./components/navbar.vue";
 
 export default {
@@ -17,11 +16,6 @@ export default {
   components: {
     navbar,
   },
-  props: {},
-  data() {},
-  computed: {},
-  watch: {},
-  methods: {},
 };
 </script>
 
