@@ -2,7 +2,7 @@
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" style="font-size: 1.5rem" href="/"
-        ><img src="./src/assets/logo.svg" alt="" class="m-0 my-auto"/>Kanban</a
+        ><img src="../../src/assets/logo.svg" alt="" class="m-0 my-auto"/>Kanban</a
       >
       <button
         class="navbar-toggler"
